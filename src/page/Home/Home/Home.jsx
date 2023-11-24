@@ -1,19 +1,22 @@
 import { Helmet } from "react-helmet-async";
-import Navbar from "../../Shared/Navbar/Navbar";
-import TrendingArticles from "../trendingArticles/trendingArticles";
+import AllPublisher from "../AllPublisher/AllPublisher";
+import Statistic from "../Statistic/Statistic";
+import TrendArticles from "../TrendArticles/TrendArticles";
+import Plans from "../Plans/Plans";
 
 const Home = () => {
     return (
-        <div>
+        <div className=" min-h-screen">
             <Helmet>
                 <title>
                     Newspaper | Home
                 </title>
             </Helmet>
 
-            <Navbar></Navbar>
-            {/* <p className=" text-2xl">Home</p> */}
-            <TrendingArticles></TrendingArticles>
+            <TrendArticles></TrendArticles>
+            <AllPublisher></AllPublisher>
+            <Statistic></Statistic>
+            <Plans></Plans>
         </div>
     );
 };
