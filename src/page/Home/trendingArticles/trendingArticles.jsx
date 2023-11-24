@@ -1,10 +1,10 @@
 
-const trendingArticles = () => {
+const TrendingArticles = () => {
     return (
         <div>
-            <p>Popular trending articles are here...</p>
+
         </div>
     );
 };
 
-export default trendingArticles;
+export default TrendingArticles;
