@@ -4,7 +4,7 @@ const Navbar = () => {
     const navItems = <>
         <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/addArticle"}>Add Articles</Link></li>
-        <li><Link to={"/"}>All Articles</Link></li>
+        <li><Link to={"/articles"}>All Articles</Link></li>
         <li><Link to={"/"}>Subscription</Link></li>
         <li><Link to={"/"}>Dashboard</Link></li>
         <li><Link to={"/"}>My Articles</Link></li>

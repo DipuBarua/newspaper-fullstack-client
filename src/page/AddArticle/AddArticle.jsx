@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -51,6 +52,12 @@ const AddArticle = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    Newspaper | addArticle
+                </title>
+            </Helmet>
+
             <div className="w-4/5 mx-auto shadow-2xl shadow-blue-300 bg-base-100 mb-10">
 
                 <h2 className=" pt-24 text-4xl font-bold text-center">Add Your Article</h2>
