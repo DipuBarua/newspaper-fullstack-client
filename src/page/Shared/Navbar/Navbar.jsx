@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../../../assets/logo_newspaper.png";
 
 const Navbar = () => {
     const navItems = <>
@@ -6,9 +7,11 @@ const Navbar = () => {
         <li><Link to={"/addArticle"}>Add Articles</Link></li>
         <li><Link to={"/articles"}>All Articles</Link></li>
         <li><Link to={"/"}>Subscription</Link></li>
-        <li><Link to={"/"}>Dashboard</Link></li>
-        <li><Link to={"/"}>My Articles</Link></li>
-        <li><Link to={"/"}>Premium Articles</Link></li>
+        <li><Link to={"/dashboard"}>Dashboard</Link></li>
+        <li><Link to={""}>My Articles</Link></li>
+        <li><Link to={""}>Premium Articles</Link></li>
+        <li><Link to={"/signup"}>SignUp</Link></li>
+        <li><Link to={"/login"}>LogIn</Link></li>
     </>
 
     // const dropDownMenu = <>
@@ -30,7 +33,7 @@ const Navbar = () => {
                         {/* {dropDownMenu} */}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Newspaper</a>
+                <a className=""><img src={logo} alt="logo.img" /></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-2">

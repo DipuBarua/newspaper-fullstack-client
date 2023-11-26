@@ -3,6 +3,7 @@ import 'react-tabs/style/react-tabs.css';
 import useArticles from "../../../hooks/useArticles";
 import { useState } from "react";
 import ArticleTabs from "../ArticleTabs/ArticleTabs";
+import { Helmet } from "react-helmet-async";
 
 const Articles = () => {
     const [articles] = useArticles();
@@ -18,7 +19,13 @@ const Articles = () => {
     const publisher = articles.filter(article => article.tag === "publisher");
 
     return (
-        <div className=" pt-36">
+        <div className=" pt-20">
+            <Helmet>
+                <title>
+                    Newspaper | articleDetails
+                </title>
+            </Helmet>
+
             {/*react tabs - Controlled mode  */}
             <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList>

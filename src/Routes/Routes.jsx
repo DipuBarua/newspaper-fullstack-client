@@ -3,12 +3,16 @@ import Root from "../Layout/Root";
 import Home from "../page/Home/Home/Home";
 import AddArticle from "../page/AddArticle/AddArticle";
 import Articles from "../page/Articles/Articles/Articles";
+import ArticleDetails from "../page/Articles/ArticleDetails/ArticleDetails";
+import Login from "../page/Login/Login";
+import SignUp from "../page/SignUp/SignUp";
+import ErrorPage from "../page/ErrorPage/ErrorPage";
 
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
-        // errorElement: <div>error 404</div>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -21,6 +25,18 @@ const routes = createBrowserRouter([
             {
                 path: "/articles",
                 element: <Articles></Articles>
+            },
+            {
+                path: "/articleDetails/:id",
+                element: <ArticleDetails></ArticleDetails>,
+            },
+            {
+                path: "/signup",
+                element: <SignUp></SignUp>,
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
             }
         ]
     },
