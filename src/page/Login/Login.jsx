@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
     const [disable, setDisable] = useState(true);
+    const { logIn } = useAuth();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -12,6 +14,13 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        // Login with email & password 
+        logIn(email, password)
+            .then(res => console.log(res.user))
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     const handleCaptcha = (e) => {

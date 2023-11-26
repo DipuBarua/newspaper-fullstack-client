@@ -1,9 +1,22 @@
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm()
-    const onSubmit = (data) => console.log(data);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signUp } = useAuth();
+    const onSubmit = (data) => {
+        console.log(data);
+
+        // sign up with email & password 
+        signUp(data.email, data.password)
+            .then(res => {
+                console.log(res.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     return (
         <div>
