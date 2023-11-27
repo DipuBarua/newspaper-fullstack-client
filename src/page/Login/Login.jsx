@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import useAuth from "../../hooks/useAuth";
+import GoogleLogin from "../Shared/SocialLogin/GoogleLogin";
 
 const Login = () => {
     const [disable, setDisable] = useState(true);
@@ -91,7 +92,7 @@ const Login = () => {
                         </div>
 
                         {/* SocialLogin */}
-
+                        <GoogleLogin></GoogleLogin>
 
                         <div className=" border border-black p-2">
                             <p>Have an account? if no, please <Link to={'/signup'}><button className="btn-link font-semibold text-blue-600">Sign Up</button></Link></p>
