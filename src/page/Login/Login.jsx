@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
     const [disable, setDisable] = useState(true);
     const { logIn } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -17,7 +19,12 @@ const Login = () => {
 
         // Login with email & password 
         logIn(email, password)
-            .then(res => console.log(res.user))
+            .then(res => {
+                console.log(res.user);
+
+                const destination = location.state?.from?.pathname || "/";
+                navigate(destination, { replace: true });
+            })
             .catch(error => {
                 console.error(error);
             })

@@ -7,8 +7,8 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         logOut()
-            // .then(res => console.log(res.user))
-            // .catch(err => console.error(err));
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
     }
     const navItems = <>
         <li><Link to={"/"}>Home</Link></li>

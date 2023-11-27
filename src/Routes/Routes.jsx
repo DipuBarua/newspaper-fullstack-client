@@ -7,6 +7,7 @@ import ArticleDetails from "../page/Articles/ArticleDetails/ArticleDetails";
 import Login from "../page/Login/Login";
 import SignUp from "../page/SignUp/SignUp";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/addArticle",
-                element: <AddArticle></AddArticle>
+                element: <PrivateRoute><AddArticle></AddArticle></PrivateRoute>
             },
             {
                 path: "/articles",
