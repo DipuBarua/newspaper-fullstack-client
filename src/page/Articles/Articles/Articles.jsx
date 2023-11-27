@@ -19,7 +19,7 @@ const Articles = () => {
     const publisher = articles.filter(article => article.tag === "publisher");
 
     return (
-        <div className=" pt-20">
+        <div className=" pt-24">
             <Helmet>
                 <title>
                     Newspaper | articleDetails

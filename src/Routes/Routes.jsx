@@ -8,6 +8,7 @@ import Login from "../page/Login/Login";
 import SignUp from "../page/SignUp/SignUp";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import Subscription from "../page/Subscription/Subscription";
 
 const routes = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
             {
                 path: "/articleDetails/:id",
                 element: <ArticleDetails></ArticleDetails>,
+            },
+            {
+                path: "/subscription",
+                element: <Subscription></Subscription>
             },
             {
                 path: "/signup",

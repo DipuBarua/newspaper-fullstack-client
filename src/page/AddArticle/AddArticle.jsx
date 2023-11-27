@@ -113,8 +113,26 @@ const AddArticle = () => {
                                 <label className="label">
                                     <span className="label-text">Publisher</span>
                                 </label>
-                                <input type="text" {...register("publisher", { required: true })} placeholder="Publisher" className="input input-bordered" required />
+                                <select defaultValue={'default'} {...register("publisher", { required: true })} className=" p-2">
+                                    <option disabled value="default">Select your publisher</option>
+                                    <option value="TheNewYorkTimes">The New York Times</option>
+                                    <option value="BBCNews">BBC News</option>
+                                    <option value="CNN">CNN</option>
+                                    <option value="Reuters">Reuters</option>
+                                    <option value="TimeMagazine">Time Magazine</option>
+                                    <option value="Forbes">Forbes</option>
+                                    <option value="AlJazeera">Al Jazeera</option>
+                                </select>
                             </div>
+
+                            {/* publisher  */}
+                            {/* <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Publisher</span>
+                                </label>
+                                <input type="text" {...register("publisher", { required: true })} placeholder="Publisher" className="input input-bordered" required />
+                            </div> */}
+
                             {/* description  */}
                             <div className="form-control">
                                 <label className="label">

@@ -3,7 +3,7 @@ import logo from "../../../assets/logo_newspaper.png";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-    const { logOut } = useAuth();
+    const { user, logOut } = useAuth();
 
     const handleSignOut = () => {
         logOut()
@@ -14,11 +14,10 @@ const Navbar = () => {
         <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/addArticle"}>Add Articles</Link></li>
         <li><Link to={"/articles"}>All Articles</Link></li>
-        <li><Link to={"/"}>Subscription</Link></li>
+        <li><Link to={"/subscription"}>Subscription</Link></li>
         <li><Link to={"/dashboard"}>Dashboard</Link></li>
         <li><Link to={""}>My Articles</Link></li>
         <li><Link to={""}>Premium Articles</Link></li>
-        <li><Link to={"/signup"}>SignUp</Link></li>
         <li><Link to={"/login"}>LogIn</Link></li>
         <li><Link to={"/"} onClick={handleSignOut}>LogOut</Link></li>
     </>
@@ -55,14 +54,25 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <p className=" px-2">{"Dipankar Barua"}</p>
-                <Link to={""}>
-                    <div className="avatar online">
-                        <div className="w-8 rounded-full mr-2">
-                            <img src={"https://i.ibb.co/6NgD2y6/girl2.jpg"} alt="" />
-                        </div>
-                    </div>
-                </Link>
+                {
+                    user ? <>
+                        <p className=" px-2">{user.displayName}</p>
+                        <Link to={""}>
+                            <div className="avatar online">
+                                <div className="w-8 rounded-full mr-2">
+                                    <img src={user.photoURL} alt="" />
+                                </div>
+                            </div>
+                        </Link>
+                    </>
+                        :
+                        <>
+                            <Link to={"/signup"}>
+                                <button className=" btn btn-ghost hover:bg-gray-500 hover:text-white">Sign Up</button>
+                            </Link>
+                        </>
+                }
+
             </div>
         </div>
     );

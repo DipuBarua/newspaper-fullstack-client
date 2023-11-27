@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ArticleCart = ({ item }) => {
     const { _id, title, image, description, publisher, tag } = item;
+
+    // TODO: for views count
+    const [views, setViews] = useState(0);
+    const handleViews = () => {
+        setViews(views + 1);
+        console.log(views);
+    }
+
+    // useEffect(() => {
+    // }, [])
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
@@ -12,7 +23,7 @@ const ArticleCart = ({ item }) => {
                 <div className="card-actions justify-between">
                     <div>-<span className=" ml-2 font-bold">{publisher}</span></div>
                     <Link to={`/articleDetails/${_id}`}>
-                        <button className="btn btn-outline hover:btn-warning">Details</button>
+                        <button onClick={handleViews} className="btn btn-outline hover:btn-warning">Details</button>
                     </Link>
                 </div>
             </div>
