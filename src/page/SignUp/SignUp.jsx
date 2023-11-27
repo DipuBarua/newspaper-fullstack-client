@@ -1,17 +1,54 @@
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signUp } = useAuth();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { signUp, updateUser } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+
     const onSubmit = (data) => {
         console.log(data);
 
         // sign up with email & password 
         signUp(data.email, data.password)
             .then(res => {
-                console.log(res.user);
+                console.log("new user:", res.user);
+
+                // update user's profile [now name,photo are available in user after login]
+                updateUser(data.name, data.photo)
+                    .then(res => {
+                        console.log("profile updated:", res);
+                        reset();
+
+                        // now post the user profile to database
+                        const userProfile = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosPublic.post("/users", userProfile)
+                            .then(res => {
+                                console.log(res.data);
+
+                                if (res.data.insertedId) {
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Your account has been created successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                                navigate("/");
+                            })
+
+                    })
+                    .catch(err => { console.log(err); })
+
             })
             .catch(error => {
                 console.log(error);
@@ -20,6 +57,10 @@ const SignUp = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Newspaper | SignUp</title>
+            </Helmet>
+
             <div className="hero min-h-screen bg-base-200">
 
                 <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl shadow-gray-500 rounded-none my-20">

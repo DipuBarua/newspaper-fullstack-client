@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo_newspaper.png";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+    const { logOut } = useAuth();
+
+    const handleSignOut = () => {
+        logOut()
+            // .then(res => console.log(res.user))
+            // .catch(err => console.error(err));
+    }
     const navItems = <>
         <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/addArticle"}>Add Articles</Link></li>
@@ -12,6 +20,7 @@ const Navbar = () => {
         <li><Link to={""}>Premium Articles</Link></li>
         <li><Link to={"/signup"}>SignUp</Link></li>
         <li><Link to={"/login"}>LogIn</Link></li>
+        <li><Link to={"/"} onClick={handleSignOut}>LogOut</Link></li>
     </>
 
     // const dropDownMenu = <>
