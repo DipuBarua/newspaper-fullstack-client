@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUser } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
     const axiosPublic = useAxiosPublic();
@@ -14,16 +16,59 @@ const AllUsers = () => {
         }
     })
 
-    const handleAdminRole = () => {
-
+    const handleAdminRole = (id) => {
+        axiosPublic.patch(`/users/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "User promoted to Admin",
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+            .catch(error => console.error(error))
     }
 
-    const handleUserDelete = () => {
+    const handleUserDelete = (id) => {
 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.delete(`/users/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "This account has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch(error => { console.log(error); })
+            }
+        });
     }
-    console.log(users);
+
     return (
         <div>
+            <Helmet>
+                <title>Newspaper | Dashboard | allUsers</title>
+            </Helmet>
+
             <div className=" flex justify-evenly mb-5 pt-5 bg-gray-300 text-blue-900 py-5 mx-10">
                 <h2 className=" text-3xl font-bold">All Users</h2>
                 <h2 className=" text-3xl font-bold">Total Users:{users.length} </h2>
@@ -38,7 +83,7 @@ const AllUsers = () => {
                             <th>IMAGE</th>
                             <th>NAME</th>
                             <th>EMAIL</th>
-                            <th>ROLE</th>
+                            <th>ROLE/ADMIN</th>
                             <th>DELETE</th>
                         </tr>
                     </thead>
@@ -71,7 +116,7 @@ const AllUsers = () => {
 
                                 <th>
                                     {(user.role === "admin") ?
-                                        <p className=" text-gray-300">Admin</p>
+                                        <p className=" text-green-600">Admin</p>
                                         :
                                         <button onClick={() => handleAdminRole(user._id)} className="btn border border-blue-900 hover:bg-gray-300">
                                             <FaUser className=" text-blue-900" />

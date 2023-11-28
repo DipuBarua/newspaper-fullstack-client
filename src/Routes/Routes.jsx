@@ -14,6 +14,7 @@ import Dashboard from "../Layout/Dashboard";
 import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
 import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
 import AllArticles from "../page/Dashboard/AllArticles/AllArticles";
+import AdminRoute from "./AdminRoute";
 
 const routes = createBrowserRouter([
     {
@@ -67,11 +68,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: "allUsers",
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: "allArticles",
-                element: <AllArticles></AllArticles>
+                element: <AdminRoute><AllArticles></AllArticles></AdminRoute>
             }
         ]
     }
