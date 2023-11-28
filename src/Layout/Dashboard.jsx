@@ -12,7 +12,7 @@ const Dashboard = () => {
                 <title>Newspaper | Dashboard</title>
             </Helmet>
 
-            <div className=" flex">
+            <div className=" md:flex">
                 {/* Dashboard Slidebar  */}
                 <div className=" w-64 min-h-screen bg-slate-700 text-white font-semibold">
                     <li className=" menu-title text-black">

@@ -16,7 +16,7 @@ const ArticleCart = ({ item }) => {
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
-            <figure><img src={image} alt="image loading..." /></figure>
+            <figure><img className=" w-full" src={image} alt="image loading..." /></figure>
             <div className="card-body hover:bg-black hover:text-white rounded-b-2xl">
                 <h2 className="card-title">{title}</h2>
                 <p>{description.slice(0, 100)}</p>

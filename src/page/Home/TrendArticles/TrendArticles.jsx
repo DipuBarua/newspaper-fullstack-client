@@ -1,16 +1,36 @@
 import useArticles from "../../../hooks/useArticles";
 import ArticleCart from "../../Shared/ArticleCart/ArticleCart";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 
 const TrendArticles = () => {
     const [articles] = useArticles();
 
+
     return (
-        <div>
-            <p className=" text-2xl"> minimum 6 trending articles are here...</p>
+
+        <Swiper
+            slidesPerView={'auto'}
+            spaceBetween={30}
+            pagination={{
+                clickable: true,
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+        >
             {
-                articles.slice(1, 7).map(article => <ArticleCart key={article._id} item={article}></ArticleCart>)
+                articles.slice(1, 7).map(article =>
+                    <SwiperSlide key={article._id}>
+                        <ArticleCart key={SwiperSlide.index} item={article}>
+                        </ArticleCart>
+                    </SwiperSlide>)
             }
-        </div>
+        </Swiper>
+
+
+
     );
 };
 
