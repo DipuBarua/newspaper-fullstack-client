@@ -57,7 +57,7 @@ const Navbar = () => {
                 {
                     user ? <>
                         <p className=" px-2">{user.displayName}</p>
-                        <Link to={""}>
+                        <Link to={"/userProfile"}>
                             <div className="avatar online">
                                 <div className="w-8 rounded-full mr-2">
                                     <img src={user.photoURL} alt="" />

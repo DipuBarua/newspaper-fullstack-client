@@ -28,7 +28,8 @@ const SignUp = () => {
                         // now post the user profile to database
                         const userProfile = {
                             name: data.name,
-                            email: data.email
+                            email: data.email,
+                            image: data.photo
                         }
                         axiosPublic.post("/users", userProfile)
                             .then(res => {

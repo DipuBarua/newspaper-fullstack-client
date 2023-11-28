@@ -36,7 +36,7 @@ const Articles = () => {
                     <Tab>Politics</Tab>
                     <Tab>Sports</Tab>
                     <Tab>Technology</Tab>
-                    <Tab>Publisher</Tab>
+                    <Tab>All Publisher</Tab>
                 </TabList>
 
                 <TabPanel>

@@ -9,6 +9,11 @@ import SignUp from "../page/SignUp/SignUp";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import Subscription from "../page/Subscription/Subscription";
+import UserProfile from "../page/UserProfile/UserProfile";
+import Dashboard from "../Layout/Dashboard";
+import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
+import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
+import AllArticles from "../page/Dashboard/AllArticles/AllArticles";
 
 const routes = createBrowserRouter([
     {
@@ -43,9 +48,33 @@ const routes = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login></Login>
+            },
+            {
+                path: "/userProfile",
+                element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
             }
         ]
     },
+    // Dashboard routes 
+    {
+        path: "dashboard",
+        element: <Dashboard></Dashboard>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+            {
+                path: "admin",
+                element: <AdminHome></AdminHome>
+            },
+            {
+                path: "allUsers",
+                element: <AllUsers></AllUsers>
+            },
+            {
+                path: "allArticles",
+                element: <AllArticles></AllArticles>
+            }
+        ]
+    }
 ]);
 
 export default routes;
