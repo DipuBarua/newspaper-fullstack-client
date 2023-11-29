@@ -1,6 +1,27 @@
 import { FaCrown, FaForward, FaStop, FaTrash } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
-const ArticleTable = ({ item, index }) => {
+const ArticleTable = ({ item, index, refetch }) => {
+    const axiosPublic = useAxiosPublic();
+
+    const handleApproval = (id) => {
+        axiosPublic.patch(`/articles/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Article has been approved.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+    }
+
     return (
         <tr >
             <th>
@@ -25,7 +46,7 @@ const ArticleTable = ({ item, index }) => {
 
             {/* EMAIL */}
             <td>
-                <div className="font-bold">{item?.author_email}</div>
+                <div className="">{item?.author_email}</div>
             </td>
 
             {/* ARTICLE Title */}
@@ -35,7 +56,7 @@ const ArticleTable = ({ item, index }) => {
 
             {/* POSTED DATE */}
             <td>
-                <div className="font-bold">{item.posted_date}</div>
+                <div className="">{item.posted_date}</div>
             </td>
 
             {/* STATUS */}
@@ -45,12 +66,12 @@ const ArticleTable = ({ item, index }) => {
 
             {/* PUBLISHER name */}
             <td>
-                <div className="font-bold">{item?.publisher}</div>
+                <div className="">{item?.publisher}</div>
             </td>
 
             {/* APPROVE */}
             <td>
-                <button onClick={() => ''} className="btn btn-ghost">
+                <button onClick={() => handleApproval(item._id)} className="btn btn-ghost">
                     <FaForward className=" text-xl text-green-600" />
                 </button>
             </td>

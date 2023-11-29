@@ -7,9 +7,9 @@ const useArticles = () => {
 
     // Tanstack query makes fetching, caching, synchronizing and updating server state 
     const { data: articles = [], refetch } = useQuery({
-        queryKey: ["articles"],
+        queryKey: ["articles", "approved"],
         queryFn: async () => {
-            const res = await axiosPublic.get("/articles")
+            const res = await axiosPublic.get("/articles/approved")
             return res.data;
         }
     })

@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
+import usePublishers from "../../hooks/usePublishers";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -11,7 +12,8 @@ const AddArticle = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
-    console.log(user);
+    const [publishers] = usePublishers();
+
 
     const onSubmit = async (data) => {
         // console.log(data);
@@ -37,7 +39,7 @@ const AddArticle = () => {
                 author_email: user.email,
                 author_image: user.photoURL,
                 posted_date: user.metadata?.lastSignInTime,
-                status: null
+                status: "pending",
             }
 
             const infoRes = await axiosPublic.post("/articles", articleInfo);
@@ -67,7 +69,7 @@ const AddArticle = () => {
 
             <div className="w-4/5 mx-auto shadow-2xl shadow-blue-300 bg-base-100 mb-10">
 
-                <h2 className=" pt-24 text-4xl font-bold text-center">Add Your Article</h2>
+                <h2 className=" pt-24 text-4xl font-bold text-center">Add Your Article </h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className=" card-body">
                     <div className=" md:flex gap-10 w-full">
@@ -121,24 +123,16 @@ const AddArticle = () => {
                                     <span className="label-text">Publisher</span>
                                 </label>
                                 <select defaultValue={'default'} {...register("publisher", { required: true })} className=" p-2">
-                                    <option disabled value="default">Select your publisher</option>
-                                    <option value="TheNewYorkTimes">The New York Times</option>
-                                    <option value="BBCNews">BBC News</option>
-                                    <option value="CNN">CNN</option>
-                                    <option value="Reuters">Reuters</option>
-                                    <option value="TimeMagazine">Time Magazine</option>
-                                    <option value="Forbes">Forbes</option>
-                                    <option value="AlJazeera">Al Jazeera</option>
+                                    <option disabled value="default">Select Publisher</option>
+                                    {
+                                        publishers.map(publisher => <option
+                                            key={publisher._id}
+                                            value={publisher.name}>
+                                            {publisher.name}
+                                        </option>)
+                                    }
                                 </select>
                             </div>
-
-                            {/* publisher  */}
-                            {/* <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Publisher</span>
-                                </label>
-                                <input type="text" {...register("publisher", { required: true })} placeholder="Publisher" className="input input-bordered" required />
-                            </div> */}
 
                             {/* description  */}
                             <div className="form-control">
