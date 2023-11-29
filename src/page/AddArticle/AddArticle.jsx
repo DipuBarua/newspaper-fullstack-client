@@ -2,14 +2,16 @@ import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../hooks/useAuth";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddArticle = () => {
-
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
+    const { user } = useAuth();
+    console.log(user);
 
     const onSubmit = async (data) => {
         // console.log(data);
@@ -31,6 +33,11 @@ const AddArticle = () => {
                 description: data.description,
                 image: res.data.data.display_url,
 
+                author_name: user.displayName,
+                author_email: user.email,
+                author_image: user.photoURL,
+                posted_date: user.metadata?.lastSignInTime,
+                status: null
             }
 
             const infoRes = await axiosPublic.post("/articles", articleInfo);
