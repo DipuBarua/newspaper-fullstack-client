@@ -5,6 +5,7 @@ import TrendArticles from "../TrendArticles/TrendArticles";
 import Plans from "../Plans/Plans";
 import BreakingNews from "../../Shared/BreakingNews/BreakingNews";
 import moment from "moment/moment";
+import ExclusiveCart from "../ExclusiveCart/ExclusiveCart";
 
 const Home = () => {
     return (
@@ -30,6 +31,10 @@ const Home = () => {
                     <div className="">
                         <AllPublisher></AllPublisher>
                     </div>
+                </div>
+
+                <div>
+                    <ExclusiveCart></ExclusiveCart>
                 </div>
 
                 <Statistic></Statistic>

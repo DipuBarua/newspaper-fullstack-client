@@ -40,6 +40,7 @@ const AddArticle = () => {
                 author_image: user.photoURL,
                 posted_date: user.metadata?.lastSignInTime,
                 status: "pending",
+                isPremium: "notPremium",
             }
 
             const infoRes = await axiosPublic.post("/articles", articleInfo);

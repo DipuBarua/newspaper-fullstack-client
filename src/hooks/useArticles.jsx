@@ -13,6 +13,15 @@ const useArticles = () => {
         }
     })
 
+    // const { data: premiums = [], refetch: premimuRefetch } = useQuery({
+    //     queryKey: ["articles", "premium"],
+    //     queryFn: async () => {
+    //         const res = await axiosPublic.get("/articles/premium")
+    //         return res.data;
+    //     }
+    // })
+
+
     return [articles, refetch]
 };
 

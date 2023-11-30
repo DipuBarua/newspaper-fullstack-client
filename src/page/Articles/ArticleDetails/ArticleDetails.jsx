@@ -8,7 +8,7 @@ const ArticleDetails = () => {
     console.log('details ', id);
 
     // tanstack query to fetch articles 
-    const { data: article = [], refetch } = useQuery({
+    const { data: article = [] } = useQuery({
         queryKey: ['details', id],
         queryFn: async () => {
             const result = await axiosPublic.get(`/articles/details/${id}`)

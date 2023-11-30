@@ -38,11 +38,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/articleDetails/:id",
-                element: <ArticleDetails></ArticleDetails>,
+                element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>,
             },
             {
                 path: "/subscription",
-                element: <Subscription></Subscription>
+                element: <PrivateRoute><Subscription></Subscription></PrivateRoute>
             },
             {
                 path: "/signup",

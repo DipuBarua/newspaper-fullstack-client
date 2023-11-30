@@ -23,6 +23,23 @@ const ArticleTable = ({ item, index, refetch }) => {
             })
     };
 
+    const handlePremium = (id) => {
+        axiosSecure.patch(`/articles/premium/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Premium Article.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+    };
+
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -119,9 +136,14 @@ const ArticleTable = ({ item, index, refetch }) => {
 
             {/* PREMIUM */}
             <td>
-                <button onClick={() => ''} className="btn border border-amber-700 hover:bg-black">
-                    <FaCrown className=" text-xl text-amber-500" />
-                </button>
+                {
+                    (item.isPremium === "premium") ?
+                        <p className=" text-amber-500 text-xl">Premium</p>
+                        :
+                        <button onClick={() => handlePremium(item._id)} className="btn border border-amber-700 hover:bg-black">
+                            <FaCrown className=" text-xl text-amber-500" />
+                        </button>
+                }
             </td>
 
         </tr>
