@@ -21,3 +21,11 @@ const AdminRoute = ({ children }) => {
 };
 
 export default AdminRoute;
+
+/**
+ * 
+ * Note: 
+ * >>Admin route is needed to secure the path line of admin panel in dashboard.
+ * >>Otherwise normal user can get access of admin route by changing just path name. 
+ * 
+ */

@@ -16,6 +16,7 @@ import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
 import AllArticles from "../page/Dashboard/AllArticles/AllArticles";
 import AdminRoute from "./AdminRoute";
 import AddPublisher from "../page/Dashboard/AddPublisher/AddPublisher";
+import UserHome from "../page/Dashboard/UserHome/UserHome";
 
 const routes = createBrowserRouter([
     {
@@ -60,24 +61,28 @@ const routes = createBrowserRouter([
     // Dashboard routes 
     {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "admin",
-                element: <AdminHome></AdminHome>
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
             },
             {
                 path: "allUsers",
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
             },
             {
                 path: "allArticles",
-                element: <AdminRoute><AllArticles></AllArticles></AdminRoute>
+                element: <AdminRoute><AllArticles></AllArticles></AdminRoute>,
             },
             {
                 path: "addPublisher",
-                element: <AdminRoute><AddPublisher></AddPublisher></AdminRoute>
+                element: <AdminRoute><AddPublisher></AddPublisher></AdminRoute>,
+            },
+            {
+                path: "userHome",
+                element: <UserHome></UserHome>,
             }
         ]
     }

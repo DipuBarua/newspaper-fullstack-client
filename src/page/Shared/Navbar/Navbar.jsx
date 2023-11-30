@@ -15,7 +15,7 @@ const Navbar = () => {
         <li><Link to={"/addArticle"}>Add Articles</Link></li>
         <li><Link to={"/articles"}>All Articles</Link></li>
         <li><Link to={"/subscription"}>Subscription</Link></li>
-        <li><Link to={"/dashboard/admin"}>Dashboard</Link></li>
+        <li><Link to={"/dashboard"}>Dashboard</Link></li>
         <li><Link to={""}>My Articles</Link></li>
         <li><Link to={""}>Premium Articles</Link></li>
         <li><Link to={"/login"}>LogIn</Link></li>

@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUser } from "react-icons/fa";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     // tanstack query to fetch all users data 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const result = await axiosPublic.get("/users")
+            const result = await axiosSecure.get("/users")
             return result.data
         }
     })
 
     const handleAdminRole = (id) => {
-        axiosPublic.patch(`/users/${id}`)
+        axiosSecure.patch(`/users/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {
@@ -46,7 +46,7 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/users/${id}`)
+                axiosSecure.delete(`/users/${id}`)
                     .then(res => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {

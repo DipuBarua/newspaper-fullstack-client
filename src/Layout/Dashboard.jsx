@@ -1,4 +1,4 @@
-import { NavLink, Navigate, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { FaAddressBook, FaAddressCard, FaArchive, FaBookmark, FaChartArea, FaHome, FaSubscript, FaUser, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
 import { Helmet } from "react-helmet-async";
@@ -56,7 +56,12 @@ const Dashboard = () => {
                                 </>
                                 :
                                 <>
-                                    <Navigate to={"/"}></Navigate>
+                                    <li>
+                                        <NavLink to={'/dashboard/userHome'}>
+                                            <FaHome></FaHome>
+                                            User
+                                        </NavLink>
+                                    </li>
                                 </>
 
                         }

@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { useForm } from "react-hook-form"
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddPublisher = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -14,7 +14,7 @@ const AddPublisher = () => {
             name: data.publisher,
             image: data.logo
         }
-        axiosPublic.post("/publishers", publisherInfo)
+        axiosSecure.post("/publishers", publisherInfo)
             .then(res => {
                 console.log(res.data);
                 if (res.data.insertedId) {

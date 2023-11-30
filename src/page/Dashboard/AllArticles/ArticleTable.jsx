@@ -1,12 +1,13 @@
 import { FaCrown, FaForward, FaStop, FaTrash } from "react-icons/fa";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ArticleTable = ({ item, index, refetch }) => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const handleApproval = (id) => {
-        axiosPublic.patch(`/articles/${id}`)
+        axiosSecure.patch(`/articles/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {
@@ -20,7 +21,33 @@ const ArticleTable = ({ item, index, refetch }) => {
                     });
                 }
             })
-    }
+    };
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/articles/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Article has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    };
 
     return (
         <tr >
@@ -85,7 +112,7 @@ const ArticleTable = ({ item, index, refetch }) => {
 
             {/* DELETE */}
             <td>
-                <button onClick={() => ''} className="btn btn-ghost">
+                <button onClick={() => handleDelete(item._id)} className="btn btn-ghost">
                     <FaTrash className=" text-xl text-red-600" />
                 </button>
             </td>
